@@ -1,0 +1,24 @@
+﻿@model MbmStore.Models.ViewModels.Cart
+
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using MbmStore.Models.ViewModels;
+@using System.Threading.Tasks;
+@using MbmStore.Models;
+@using Microsoft.AspNetCore.Mvc;
+@using MbmStore.Infrastructure;
+
+
+<div class="">
+    @if (Model.Lines.Count() > 0)
+    {
+        <small class="navbar-text">
+            <b>Your cart:</b> @Model.Lines.Sum(x => x.Quantity) item(s) @Model.ComputeTotalValue().ToString("c")
+        </small>
+    }
+    <a class="btn btn-sm btn-secondary navbar-btn"
+       asp-controller="Cart" asp-action="Index" asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <i class="fa fa-shopping-cart">View Cart</i>
+    </a>
+</div>

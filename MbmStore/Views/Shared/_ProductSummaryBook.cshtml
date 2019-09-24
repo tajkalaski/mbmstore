@@ -1,0 +1,26 @@
+﻿@model MbmStore.Models.Book
+
+@using MbmStore.Infrastructure;
+@using MbmStore.Models;
+
+<div class="row">
+    <div class="col-md-3">
+        <img src="/Images/@Model.ImgUrl" alt="@Model.Title" style="width:182px" />
+    </div>
+    <div class="col-md-4">
+        <strong>Title:</strong> @Model.Title<br />
+        <strong>Author:</strong> @Model.Author<br />
+        <strong>Price:</strong> @Model.Price<br />
+        <strong>Publisher:</strong> @Model.Publisher (@Model.Published)<br />
+        <strong>ISBN:</strong> @Model.ISBN<br /> <br />
+    </div>
+
+    <div>
+    @await Html.PartialAsync("_AddToCartButton", (Book) Model)
+    </div>
+    </div>
+<br />
+@*<div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>*@

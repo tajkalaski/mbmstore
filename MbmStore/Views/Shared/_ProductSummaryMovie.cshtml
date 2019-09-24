@@ -1,0 +1,19 @@
+﻿@model MbmStore.Models.Movie
+
+@using MbmStore.Infrastructure;
+@using MbmStore.Models;
+
+<div class="row">
+    <div class="col-md-2">
+        <img src="/Images/@Model.ImgUrl" alt="@Model.Title" height="268" width="182" /> <br />
+        <strong>Title:</strong> @Model.Title<br />
+        <strong>Director: </strong> @Model.Director<br>
+        <strong>Price: </strong> @String.Format("{0:0.00}", Model.Price) <br />
+
+      <div> @await Html.PartialAsync("_AddToCartButton", (Movie)Model) </div>
+    </div>
+    </div>
+@*<div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>*@

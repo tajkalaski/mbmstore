@@ -1,0 +1,90 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@addTagHelper MbmStore.Infrastructure.*, MbmStore
+
+@using MbmStore.Infrastructure;
+@using MbmStore.Models;
+@using MbmStore.Models.ViewModels;
+
+@*@model IEnumerable<Product>*@
+@model ProductsListViewModel
+
+@{
+    //Layout = "~/Views/Shared/_Default/_Layout.cshtml";
+    ViewData["Title"] = "Products";
+}
+
+<a asp-controller="Home" asp-action="Index">Home</a>
+
+<h2>Catalogue</h2>
+
+@{
+
+    @if (Model.Products.OfType<Book>().ToList().Count > 0)
+    {<div class="products" style="clear:both">
+            <h2>The Books</h2>
+            @foreach (Book book in Model.Products.OfType<Book>().ToList())
+            {
+                @await Html.PartialAsync("_ProductSummaryBook", book)
+            }
+        </div>
+    }
+
+
+    @if (Model.Products.OfType<Movie>().ToList().Count > 0)
+    {<div class="products" style="clear:both;padding-top:50px;">
+            <h2>The Movies</h2>
+            @foreach (Movie movie in Model.Products.OfType<Movie>().ToList())
+            {
+                @await Html.PartialAsync("_ProductSummaryMovie", movie)
+            }
+        </div>
+    }
+
+    @if (Model.Products.OfType<MusicCD>().ToList().Count > 0)
+    {
+        <div class="products" style="clear:both;padding-top:50px;">
+            <h2>The MusicCDs</h2>
+            @foreach (MusicCD cD in Model.Products.OfType<MusicCD>().ToList())
+            {
+                @await Html.PartialAsync("_ProductSummaryMusicCD", cD)
+            }
+        </div>
+    }
+
+        <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+             page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+             class="btn-group pull-right m-1">
+        </div>
+
+
+
+    <div>
+        @*<div>
+                         @foreach (Product product in ViewBag.Products)
+                         {
+                             if (product is MusicCD)
+                             {
+                                 MusicCD cd = (MusicCD)product;
+                                 <div>
+                                     <strong>Tracks:</strong>
+                                     <ol>
+                                         @foreach (Track track in cd.Tracks)
+                                         {
+                                             <li>
+                                                 @track.Title
+                                                 (@track.Composer)
+                                                 @track.Lenght.Minutes:@track.Lenght.Seconds
+                                             </li>
+                                         }
+                                     </ol>
+                                     <br />
+                                     <strong>Total playing time</strong>
+                                     @cd.GetPlayingTime()
+
+                                 </div>
+            </div>*@
+
+    </div>
+}
+
+
